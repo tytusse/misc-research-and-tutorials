@@ -1,0 +1,181 @@
+<!doctype html>
+<script src="https://en.js.cx/test/libs.js"></script>
+<script src="test.js"></script>
+<script>
+  function setClass(element, className) {
+    const att = document.createAttribute('class');
+    att.value = className;
+    element.setAttributeNode(att);
+  }
+  let previousVariant = undefined;
+  function addReport(variant, iterations, arrLen) {
+    const root = document.getElementById('reports');
+    if(!previousVariant || previousVariant !== variant) {
+      const row = document.createElement("tr");
+      const cell = document.createElement('td');
+      const text = document.createTextNode(variant);
+      cell.appendChild(text);
+      cell.setAttribute('class', 'spacer');
+      cell.setAttribute('colspan', 3);
+      row.appendChild(cell);
+      root.appendChild(row);
+    }
+    previousVariant = variant;
+
+    const row = document.createElement("tr");
+    function addCell(text){
+      const td = document.createElement('td');
+      const textnode = document.createTextNode(text);
+      td.appendChild(textnode);
+      row.appendChild(td);
+    }
+    addCell(variant);
+    addCell(arrLen);
+    addCell(iterations);
+    root.appendChild(row);
+  }
+
+  function makeGraph(n, afterElement) {
+    const root = document.getElementById('graph');
+    const subRoot = document.createElement('div');
+    setClass(subRoot, 'subRoot');
+    const caption = document.createElement('div');
+    caption.appendChild(document.createTextNode(`N=${n}`));
+    setClass(caption, 'caption');
+
+    function mkTable(shouldMark, getValue) {
+      const table = document.createElement('table');
+
+      for(let s=0; s < n;s++) {
+        const tr = document.createElement('tr');
+        for(let i=0; i < n; i++){
+            let mark=shouldMark(i, s);
+            let value = getValue?.() ?? (mark ? "1" : "0");
+            const td = document.createElement('td');
+            const textnode = document.createTextNode(value);
+            
+            if(mark) setClass(td, 'marked');
+
+            td.appendChild(textnode);
+            tr.appendChild(td);
+        }
+        table.appendChild(tr);
+      }  
+
+      return table;
+    }
+
+    const tableA = mkTable((c, r) => (c <= r));
+    const tableB = mkTable((c, r) => (c > r));
+
+    subRoot.appendChild(caption);
+    subRoot.appendChild(tableA);
+    subRoot.appendChild(tableB);
+    afterElement.insertAdjacentElement('afterend', subRoot);
+    // root.appendChild(subRoot);
+  }
+
+  // (n^2 + n) / 2
+  function getMaxSubSum(arr) {
+    if(arr.length == 0) { 
+      addReport('n^2', 0, 0);
+      return 0; 
+    }
+    let result = arr[0];
+    let iterations = 0;
+    function publishReport() {
+      addReport('n^2', iterations, arr.length)
+    }
+
+    for(let s=0; s < arr.length;s++) {
+      let sum = 0;
+      for(let i=s; i < arr.length; i++) {
+          sum+=arr[i];
+          result = Math.max(result, sum);
+          iterations++;
+      }
+
+      if(result<0) {
+        publishReport();
+        return 0;
+      }
+    }
+    publishReport();
+    return result;
+  }
+
+  function getMaxSubSum2(arr) {
+    if(arr.length == 0) { 
+      addReport('n', 0, 0);
+      return 0; 
+    }
+    let result = arr[0];
+    let iterations = 0;
+    function publishReport() {
+      addReport('n', iterations, arr.length)
+    }
+
+    let sum = 0;
+    for(let i=0; i < arr.length; i++) {
+        sum+=arr[i];
+        result = Math.max(result, sum, arr[i]);
+        iterations++;
+    }
+
+    if(result<0) {
+      publishReport();
+      return 0;
+    }
+    
+    const allSum = sum;
+
+    for(let i=0; i<arr.length-1; i++){
+      sum-=arr[i];
+      result = Math.max(result, sum);
+      iterations++;
+    }
+    
+    publishReport();
+    return result;
+  }
+
+</script>
+<style>
+  .subRoot, table {
+    display: inline-block;
+  }
+
+  .subRoot, table, table#reports td {
+    border: 1px solid;
+    font-size: 10pt;
+  }
+
+  table#reports td.spacer {
+    background-color: gray;
+    font-weight: bold;
+    padding: 10pt 1pt 1pt 3pt;
+  }
+
+  table#reports td {
+    padding: 3pt;
+  }
+
+  .marked {
+    background: yellow;
+  }
+
+
+</style>
+<body>
+  <script>
+    makeGraph(5, document.currentScript);
+  </script>
+  <table id="reports">
+    <thead>
+      <th>Variant</th>
+      <th>Array size</th>
+      <th>Iterations</th>
+    </thead>
+  </table>
+</body>
+</html>
