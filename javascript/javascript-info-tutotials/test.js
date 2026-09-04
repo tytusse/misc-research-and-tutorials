@@ -2,6 +2,7 @@ describe("getMaxSubSum", function() {
   let variants = [
     { getSut: () => getMaxSubSum, name: "n^2"},
     { getSut: () => getMaxSubSum2, name: "n"},
+    { getSut: () => getMaxSubSumKar, name: "n karol"},
   ];
 
   for(let variant of variants) {

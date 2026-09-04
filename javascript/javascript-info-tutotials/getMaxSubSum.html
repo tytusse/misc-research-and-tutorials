@@ -139,6 +139,33 @@
     return result;
   }
 
+  function getMaxSubSumKar(arr) {
+    // if(arr.length == 0) { 
+    //   addReport('n', 0, 0);
+    //   return 0; 
+    // }
+
+    let iterations = 0;
+    function publishReport() {
+      addReport('n karol', iterations, arr.length)
+    }
+
+    let current = 0;
+    let best = 0;
+    for(let v of arr){
+      current += v;
+      if(current < 0){
+        current = 0;
+      } else if(current > best){
+        best = current;
+      }
+      iterations++;
+    }
+
+    publishReport();
+    return best;
+  }
+
 </script>
 <style>
   .subRoot, table {
