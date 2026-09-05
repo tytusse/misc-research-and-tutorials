@@ -3,9 +3,11 @@
 `n^2 + n` is always even for n in N
 If k is in N, and we use `n = 2k + 1` (or `2k-1` - pick one) then we have
 
-`(2k+1)^2 + 2k + 1 = 4k^2 + 2k + 1 + 2k + 1 = 4k^2 + 4k +2 = 2*(2k^2 + 2k + 1) = 2*p` 
+`(2k+1)^2 + 2k + 1 = 4k^2 + 4k + 1 + 2k + 1 = 4k^2 + 6k +2 = 2*(2k^2 + 3k + 1) = 2*whatever` 
 where p is in N - thus result is even.
+Or `n^2+n=n(n+1) = (2k+1)*(2k+1+1) = (2k+1)(2k+2) = 4k2 + 4k + 2k + 2 = ...` - all parts are even.
+Or for `n=2k-1`
 
-`(2k-1)^2 + 2k-1 = 4k^2 - 2k + 1 + 2k - 1 = 4k^2 = 2*p` - again - even.  
+`n^2+n=n(n+1)=(2k-1)(2k-1+1)=(2k-1)*k*2 = whatever * 2` - again - even.  
 
-For n=2k, `n^2+n=n(n+1)=2k(2k+1)` has 2 in front - even.
+For n=2k, `n^2+n=n(n+1)=2k(2k+1)=2*whatever` has 2 in front - even.
