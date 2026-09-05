@@ -7,3 +7,5 @@ If k is in N, and we use `n = 2k + 1` (or `2k-1` - pick one) then we have
 where p is in N - thus result is even.
 
 `(2k-1)^2 + 2k-1 = 4k^2 - 2k + 1 + 2k - 1 = 4k^2 = 2*p` - again - even.  
+
+For n=2k, `n^2+n=n(n+1)=2k(2k+1)` has 2 in front - even.
