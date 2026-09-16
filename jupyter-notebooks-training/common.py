@@ -3,8 +3,6 @@ import cmath
 import math
 import functools
 
-def foo(x): return x+1
-
 def plotVectors(vectors, colors=[], kind='vectors'):
     top = max([x.imag for x in vectors])
     bottom = min([x.imag for x in vectors])
@@ -17,7 +15,7 @@ def plotVectors(vectors, colors=[], kind='vectors'):
         # Plot each complex number as an arrow starting at (0,0)
         for z in vectors:
             color = colors[idx] if(len(colors)>idx) else 'blue'
-                
+            idx = idx + 1
             plt.quiver(0, 0, z.real, z.imag, angles='xy', scale_units='xy', scale=1, 
                        color=color, alpha=0.8)
             # Add a text label near the arrowhead
