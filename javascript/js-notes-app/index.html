@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <script src="./lib.js"></script>
+        <style>
+            .logContainer {
+                border: 1pt solid;
+            }
+        </style>
+    </head>
+
+<body onload="renderScripts()">
+<div id="scriptsToShow">
+<script>
+class Foo {
+    bar() {
+        log("barbar");
+    }
+}
+log("foo");
+log([1,2,3]);
+log({
+    name: "john", 
+    dog: {
+        name: "Rolf"
+    }
+});
+</script>
+</div>
+</body>
+</html>
