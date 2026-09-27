@@ -1,11 +1,7 @@
 <html>
     <head>
         <script src="./lib.js"></script>
-        <style>
-            .logContainer {
-                border: 1pt solid;
-            }
-        </style>
+        <link href="./lib.css" rel="stylesheet" />
     </head>
 
 <body onload="renderScripts()">
@@ -21,9 +17,26 @@ log([1,2,3]);
 log({
     name: "john", 
     dog: {
-        name: "Rolf"
+        name: "Rolf",
+        age: 42,
+        state: undefined, 
+        winter: null,
     }
 });
+</script>
+<script>
+const foobar = {
+    foo: "bar",
+    baz: 42
+};
+
+for(let propName of Object.getOwnPropertyNames(foobar)){
+    let val = foobar[propName];
+    log(`${propName}: ${val}`);
+}
+
+log(foobar);
+
 </script>
 </div>
 </body>

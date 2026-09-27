@@ -1,0 +1,46 @@
+.logContainer {
+    border: 1pt solid;
+}
+
+article.logItem > ul.objectTree {
+    &::before {
+        content: "{";
+    }
+    /* &::after{
+        content: "}";
+    } */
+}
+
+ul.objectTree {
+    list-style-type:none;
+    padding:0;
+    li {
+        margin-left: 20px;
+        /* &:last-child::after {
+            content: " }";
+        } */
+    }
+    &::after {
+        content: "}";
+    }
+    .value{
+        &.number {
+            color: green;
+        }
+        &.null {
+            color: blue;
+        }
+        &.string {
+            color: orange;
+            &::before, &::after {
+                content: "\"";
+            }
+        }
+    }
+    .name::after {
+        content: ": ";
+    }
+    .name:has(+ .objectTree)::after {
+        content: ": {"
+    }
+}
