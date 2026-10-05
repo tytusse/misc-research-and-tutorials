@@ -1,0 +1,7 @@
+# Add your direct deps here (top-level only)
+torch
+torchvision
+torchaudio
+# transformers
+# datasets
+# jupyter

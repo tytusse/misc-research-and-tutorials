@@ -145,3 +145,4 @@ vite.config.ts.timestamp-*
 .ipynb_checkpoints
 # python
 __pycache__
+.venv
